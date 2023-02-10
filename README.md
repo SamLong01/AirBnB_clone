@@ -1,6 +1,6 @@
 # AirBnB clone - The Console
 
-! [Image Link] (https://raw.githubusercontent.com/coding-max/hbtn_config/main/assets/hbnb.png)
+![Image Link] (<https://raw.githubusercontent.com/coding-max/hbtn_config/main/assets/hbnb.png>)
 
 ---
 
@@ -15,7 +15,7 @@
 
 ### Description
 
-! [Image Link] (https://stenwire.github.io/AirBnB_clone/media/concept.png)
+![Image Link] (<https://stenwire.github.io/AirBnB_clone/media/concept.png>)
 
 ---
 
