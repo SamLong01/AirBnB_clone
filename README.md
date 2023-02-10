@@ -1,12 +1,10 @@
 # AirBnB clone - The Console
 
-! [Image Link] (<https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230206T181115Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=f8d6ee6c6667fc3e21c48ce74faf5ee447e6a351a85ad8c73589e23ae2c63a6d>)
+! [Image Link] (https://raw.githubusercontent.com/coding-max/hbtn_config/main/assets/hbnb.png)
 
 ---
 
 ## Table of Content
-
----
 
 * Description
 * Purpose
@@ -17,7 +15,7 @@
 
 ### Description
 
-! [Image Link] (<https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/815046647d23428a14ca.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230210%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230210T092049Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6b419de68a840b914d2999ad386fbea9136f80eb07592a88668d9afb9d247806>)
+! [Image Link] (https://stenwire.github.io/AirBnB_clone/media/concept.png)
 
 ---
 
