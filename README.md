@@ -106,6 +106,6 @@ $
 
 All tests should also pass in non-interactive mode:
 
-```Terminal
+```Terminals
 echo "python3 -m unittest discover tests" | bash
 ```
