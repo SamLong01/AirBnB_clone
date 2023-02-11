@@ -14,7 +14,7 @@ class test_console(unittest.TestCase):
     def set_up(self):
         """test for setup"""
         self.backup = sys.stdout
-        self.get_output = StringIO() #this will read the file
+        self.get_output = StringIO()  # this will read the file
         sys.stdout = self.get_output
 
     def tearDown(self):
@@ -116,6 +116,7 @@ class test_console(unittest.TestCase):
         console.onecmd("create Menor")
         x = (self.get_output.getvalue())
         self.assertEqual("** class doesn't exist **\n", x)
+
 
 if __name__ == '__main__':
     unittest.main()

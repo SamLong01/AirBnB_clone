@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Unit testting for User"""
 
 import unittest
@@ -11,37 +11,40 @@ class TestUser(unittest.TestCase):
     """Test for User class"""
 
     def test_docstring(self):
-        """This is a test to check if functions, classes and modules all have docstring"""
+        """
+        This is a test to check if functions,
+        classes and modules all have docstring
+        """
         message = "Docstring is not present in function"
         self.assertIsNotNone(models.user.__doc__, message)
         message = "Docstring is not present in class"
         self.assertIsNotNone(User.__doc__, message)
-    
+
     def test_exec_file(self):
         """Test to check if all files are executable"""
-        #Check if read access
+        # Check if read access
         read_true = os.access("models/user.py", os.R_OK)
         self.assertTrue(read_true)
 
-        #Check if write access
+        # Check if write access
         write_true = os.access("models/user.py", os.W_OK)
         self.assertTrue(write_true)
 
-        #Check for executable
+        # Check for executable
         exec_true = os.access("models/user.py", os.X_OK)
         self.assertTrue(exec_true)
-    
+
     def test_init_User(self):
         """Test to check if object is User"""
         check_User = User()
         self.assertIsInstance(check_User, User)
-    
+
     def test_id(self):
         """Check if the ids are unique, that is not the same"""
         first_id = User()
         second_id = User()
         self.assertNotEqual(first_id, second_id)
-    
+
     def test_str(self):
         """Check if the output is a string"""
         str_obj = User()
@@ -49,7 +52,7 @@ class TestUser(unittest.TestCase):
         first_str = "[User] ({}) {}".format(str_obj.id, dictionary)
         second_str = str(str_obj)
         self.assertEqual(first_str, second_str)
-    
+
     def test_save(self):
         """Check if date update is save"""
         updated = User()
@@ -57,7 +60,7 @@ class TestUser(unittest.TestCase):
         updated.save()
         second_update = updated.updated_at
         self.assertNotEqual(first_update, second_update)
-    
+
     def test_to_dict(self):
         """Check if to_dict added a dictionary"""
         original_model = User()
@@ -66,7 +69,7 @@ class TestUser(unittest.TestCase):
         for key, value in dict_model.items():
             check = 0
             if dict_model['__class__'] == 'User':
-                check+=1
+                check += 1
             self.assertTrue(check == 1)
         for key, value in dict_model.items():
             if key == "created_at":

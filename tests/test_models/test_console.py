@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Test for console"""
 import sys
 import models
@@ -14,13 +14,13 @@ class test_console(unittest.TestCase):
     def set_up(self):
         """test for setup"""
         self.backup = sys.stdout
-        self.get_output = StringIO() #this will read the file
+        self.get_output = StringIO()  # this will read the file
         sys.stdout = self.get_output
-    
+
     def tearDown(self):
         """Test tear down"""
         sys.stdout = self.backup
-    
+
     def create(self):
         """This create an instance of the HBNBCommand"""
         return HBNBCommand
@@ -29,18 +29,18 @@ class test_console(unittest.TestCase):
         """Quit the test"""
         console = self.create()
         self.assertTrue(console.onecmd("quit"))
-    
+
     def test_EOF(self):
         """Check for the end of a file (EOF)"""
         console = self.create()
         self.assertTrue(console.onecmd("EOF"))
-    
+
     def test_all(self):
         """Test all"""
         console = self.create()
         console.onecmd("all")
         self.assertTrue(isinstance(self.get_output.getvalue(), str))
-    
+
     def test_show(self):
         """Check if all show exist"""
         console = self.create()
@@ -54,7 +54,7 @@ class test_console(unittest.TestCase):
         x = (self.get_output.getvalue())
         sys.stdout = self.backup
         self.assertTrue(str is type(x))
-    
+
     def test_show_class_name(self):
         """Checking of class name is missing"""
         console = self.create()
@@ -101,7 +101,7 @@ class test_console(unittest.TestCase):
         """Create test"""
         console = self.create()
         console.onecmd("create User")
-        self.assertTrue(isinstance(self.get_output.getvalue(), str)) 
+        self.assertTrue(isinstance(self.get_output.getvalue(), str))
 
     def test_class_name(self):
         """Test to check if class name is missing"""
@@ -117,5 +117,6 @@ class test_console(unittest.TestCase):
         x = (self.get_output.getvalue())
         self.assertEqual("** class doesn't exist **\n", x)
 
+
 if __name__ == '__main__':
-    unittest.main()      
+    unittest.main()
