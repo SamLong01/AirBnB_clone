@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""class that inherit from BaseModel"""
-
+"""Defines a class Amenity"""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """class that inherit from BaseModel"""
+    """Defines a class that inherits from BaseModel
+          Public class attributes:
+              name: string - empty string
+    """
+
     name = ""

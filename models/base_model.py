@@ -1,52 +1,61 @@
 #!/usr/bin/env python3
-""" Base model
-    It has the following instance attributes
-    - id: Assign a uuid when an instance is created
-    - created_at: Assign the current datetime when an instance is created
-    - updated_at: Assign the current datetime everytime an object is updated
 """
-import uuid
+This is a Parent class that will be inherited
+"""
 import models
+import uuid
 from datetime import datetime
+
+"""
+class BaseModel that defines all common attributes/methods for other classes
+"""
 
 
 class BaseModel:
-    """Defines all common attributes/methods for other class"""
 
     def __init__(self, *args, **kwargs):
-        """Class constructor"""
-        if kwargs:
-            """ kwargs = self.__dict__
-                created_at and updated_at are strings in the dictionary
-                datetime: used to convert these strings into datetime object
-            """
+        """initializing all attributes
+        """
+
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.today()
+        self.updated_at = datetime.today()
+
+        if len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key == "created_at":
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                if key == "updated_at":
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                if key != "__class__":
-                    setattr(self, key, value)
+                if key == 'created_at' or key == 'updated_at':
+                    f = "%Y-%m-%dT%H:%M:%S.%f"
+                    self.__dict__[key] = datetime.strptime(value, f)
+                else:
+                    self.__dict__[key] = value
         else:
-            self.id = str(uuid.uuid4())  # creating a unique id
-            self.created_at = datetime.now()  # time when instance is created
-            self.updated_at = datetime.now()  # time when instance is updated
             models.storage.new(self)
 
     def __str__(self):
-        """ Print string method """
+        """
+        Returns:
+        -class name
+        -id and
+        -attribute dictionary
+        """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
     def save(self):
-        """Makes update with the current datetime"""
-        self.updated_at = datetime.now()
+        """
+            updates the public instance attribute 'updated_at'
+            with the current datetime
+        """
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
-        """This returns a dict with all the keys and values of the instance"""
-        new_dict = self.__dict__.copy()
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-        new_dict["__class__"] = self.__class__.__name__
-        return new_dict
+        """
+            returns a dictionary containing all keys/values of '__dict__'
+            of the instance
+        """
+        converted = self.__dict__.copy()
+        converted["created_at"] = self.created_at.isoformat()
+        converted["updated_at"] = self.updated_at.isoformat()
+        converted["__class__"] = self.__class__.__name__
+        return (converted)

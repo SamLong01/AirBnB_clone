@@ -1,81 +1,50 @@
 #!/usr/bin/env python3
-"""Unit testting for BaseModel"""
-
-import unittest
-import models
+""" Module of Unittests """
 import os
+import unittest
+import datetime
 from models.base_model import BaseModel
+import os
+from models import storage
+from models.engine.file_storage import FileStorage
 
 
-class TestBaseModel(unittest.TestCase):
-    """Test for BaseModel class"""
+class BaseModelTests(unittest.TestCase):
 
-    def test_docstring(self):
-        """
-        This is a test to check if functions,
-        classes and modules all have docstring
-        """
-        message = "Docstring is not present in function"
-        self.assertIsNotNone(models.base_model.__doc__, message)
-        message = "Docstring is not present in class"
-        self.assertIsNotNone(BaseModel.__doc__, message)
+    my_model = BaseModel()
 
-    def test_exec_file(self):
-        """Test to check if all files are executable"""
-        # Check if read access
-        read_true = os.access("models/base_model.py", os.R_OK)
-        self.assertTrue(read_true)
+    def testBaseModel1(self):
+        """ This Tests attribute values of a BaseModel instance """
 
-        # Check if write access
-        write_true = os.access("models/base_model.py", os.W_OK)
-        self.assertTrue(write_true)
+        self.my_model.name = "myFirstModel"
+        self.my_model.my_number = 89
+        self.my_model.save()
+        my_model_json = self.my_model.to_dict()
 
-        # Check for executable
-        exec_true = os.access("models/base_model.py", os.X_OK)
-        self.assertTrue(exec_true)
+        self.assertEqual(self.my_model.name, my_model_json['name'])
+        self.assertEqual(self.my_model.my_number, my_model_json['my_number'])
+        self.assertEqual('BaseModel', my_model_json['__class__'])
+        self.assertEqual(self.my_model.id, my_model_json['id'])
 
-    def test_init_BaseModel(self):
-        """Test to check if object is BaseModel"""
-        check_BaseModel = BaseModel()
-        self.assertIsInstance(check_BaseModel, BaseModel)
+    def testSave(self):
+        """ This tests Checks if save method updates the public instance
+        attribute updated_at """
 
-    def test_id(self):
-        """Check if the ids are unique, that is not the same"""
-        first_id = BaseModel()
-        second_id = BaseModel()
-        self.assertNotEqual(first_id, second_id)
+        self.my_model.first_name = "First"
+        self.my_model.save()
 
-    def test_str(self):
-        """Check if the output is a string"""
-        str_obj = BaseModel()
-        dictionary = str_obj.__dict__
-        first_str = "[BaseModel] ({}) {}".format(str_obj.id, dictionary)
-        second_str = str(str_obj)
-        self.assertEqual(first_str, second_str)
+        self.assertIsInstance(self.my_model.id, str)
+        self.assertIsInstance(self.my_model.created_at, datetime.datetime)
+        self.assertIsInstance(self.my_model.updated_at, datetime.datetime)
 
-    def test_save(self):
-        """Check if date update is save"""
-        updated = BaseModel()
-        first_update = updated.updated_at
-        updated.save()
-        second_update = updated.updated_at
-        self.assertNotEqual(first_update, second_update)
+        first_dict = self.my_model.to_dict()
 
-    def test_to_dict(self):
-        """Check if to_dict added a dictionary"""
-        original_model = BaseModel()
-        dict_model = original_model.to_dict()
-        self.assertIsInstance(dict_model, dict)
-        for key, value in dict_model.items():
-            check = 0
-            if dict_model['__class__'] == 'BaseModel':
-                check += 1
-            self.assertTrue(check == 1)
-        for key, value in dict_model.items():
-            if key == "created_at":
-                self.assertIsInstance(value, str)
-            if key == "updated_at":
-                self.assertIsInstance(value, str)
+        self.my_model.first_name = "Second"
+        self.my_model.save()
+        sec_dict = self.my_model.to_dict()
+
+        self.assertEqual(first_dict['created_at'], sec_dict['created_at'])
+        self.assertNotEqual(first_dict['updated_at'], sec_dict['updated_at'])
 
 
 if __name__ == '__main__':
