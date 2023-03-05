@@ -1,12 +1,7 @@
 .places {
   margin-bottom: 60px;
 }
-.boxes {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
-}
+
 .places h1 {
   font-size: 30px;
   vertical-align: top;
@@ -59,30 +54,24 @@
     width: 100px;
 }
 
-.max_guest p,
-.number_rooms p,
-.number_bathrooms p{
-    margin: 0;
-}
-
 .img1 {
     background-image: url("../images/icon_group.png");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 10%;
     height: 50px;
 }
 
 .img2 {
     background-image: url("../images/icon_bed.png");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 10%;
     height: 50px;
 }
 
 .img3 {
     background-image: url("../images/icon_bath.png");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 10%;
     height: 50px;
 }
 
